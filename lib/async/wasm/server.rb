@@ -15,7 +15,9 @@ module Async
 
             result = @instance.invoke(*message)
 
-            stream.puts(result.to_json)
+            # Write directly to the output stream:
+            JSON::State.generate(result, {}, stream)
+            stream.puts
           end
         end
       end
